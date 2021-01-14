@@ -13,7 +13,7 @@ class GetGameByMatchId implements UseCase<Game, Params>
   GetGameByMatchId(this.repository);
 
   @override
-  Future<Either<Failure, Game>> call({Params params}) {
+  Future<Either<Failure, Game>> call(Params params) {
     return repository.getGameByMatchId(params.matchUrl);
   }
 }

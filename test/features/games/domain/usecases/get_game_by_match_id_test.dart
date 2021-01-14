@@ -38,7 +38,7 @@ void main() {
         .thenAnswer((realInvocation) async => Right(tGame));
 
       //act
-      final result = await useCase.execute(url: matchUrl);
+      final result = await useCase(Params(matchUrl: matchUrl));
 
       //asset
       expect(result, Right(tGame));

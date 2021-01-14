@@ -11,7 +11,7 @@ class GetLastGames implements UseCase<List<Game>, NoParams>
   GetLastGames(this.repository);
 
   @override
-  Future<Either<Failure, List<Game>>> call({NoParams params}) {
+  Future<Either<Failure, List<Game>>> call(NoParams params) {
     return repository.getLastGames();
   }
 }
