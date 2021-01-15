@@ -35,10 +35,10 @@ void main() {
   group('fromJson', () {
     test('should return a valid model when JSON is provided', () async {
       //arrange
-      final Map<String, dynamic> json = jsonDecode(fixture('game.json'));
+      final Map<String, dynamic> map = json.decode(fixture('game.json'));
 
       //act
-      final result = GameModel.fromJson(json);
+      final result = GameModel.fromJson(map);
 
       //assert
       expect(result, tGameModel);
