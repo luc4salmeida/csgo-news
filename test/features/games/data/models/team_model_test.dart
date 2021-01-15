@@ -33,4 +33,21 @@ void main() {
       expect(result, equals(tTeamModel));
     });
   });
+
+  
+  group('toJson', () {
+    test('should return a JSON map contain the proper data', () async {
+      //act
+      final result = tTeamModel.toJson();
+
+      //asset
+      final expectedMap = {
+        "name":"Test",
+        "crest":"https://google.com",
+        "result":0
+      };
+
+      expect(result, expectedMap);
+    });
+  });
 }
