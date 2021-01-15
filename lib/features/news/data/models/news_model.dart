@@ -20,10 +20,10 @@ class NewsModel extends News
 
   factory NewsModel.fromJson(Map<String, dynamic> map) {
     return NewsModel(
-      date: map['date'],
-      description: map['description'],
-      link: map['link'],
-      title: map['title']
+      date: map['date'] as String,
+      description: map['description'] as String,
+      link: map['link'] as String,
+      title: map['title'] as String
     );
   }
 
