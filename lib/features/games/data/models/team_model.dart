@@ -22,4 +22,12 @@ class TeamModel extends Team
       result: map['result'] as int
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "crest": crest,
+      "result": result
+    };
+  }
 }
