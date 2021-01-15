@@ -26,4 +26,13 @@ class NewsModel extends News
       title: map['title']
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'link': link,
+      'date': date
+    };
+  }
 }
