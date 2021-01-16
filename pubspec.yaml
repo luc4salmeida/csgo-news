@@ -24,6 +24,10 @@ dependencies:
 
   http: ^0.12.2
 
+  data_connection_checker: ^0.3.4
+
+  shared_preferences: ^0.5.12+4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
