@@ -1,6 +1,6 @@
 import 'package:csgo_flutter/core/error/exceptions.dart';
 import 'package:csgo_flutter/core/error/failure.dart';
-import 'package:csgo_flutter/core/platform/network_info.dart';
+import 'package:csgo_flutter/core/network/network_info.dart';
 import 'package:csgo_flutter/features/games/data/datasources/game_local_data_source.dart';
 import 'package:csgo_flutter/features/games/data/datasources/game_remote_data_source.dart';
 import 'package:csgo_flutter/features/games/data/models/game_model.dart';
@@ -63,7 +63,7 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((realInvocation) async => true);
       }); 
 
-       test('should return remote data when the remote data source is sucesseful', () async {
+       test('should return remote data when the remote data source is sucessful', () async {
         //arrange
         when(mockRemoteDataSource.getGameByMatchId(any))
         .thenAnswer((realInvocation) async => tGameModel);
@@ -76,7 +76,7 @@ void main() {
         expect(result, Right(tGameModel));
       });
 
-      test('should cache remote data when the remote data source is sucesseful', () async {
+      test('should cache remote data when the remote data source is sucessful', () async {
         //arrange
         when(mockRemoteDataSource.getGameByMatchId(any))
         .thenAnswer((realInvocation) async => tGameModel);
