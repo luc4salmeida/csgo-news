@@ -20,12 +20,9 @@ void main() {
     useCase = GetLastNews(mockNewsRepository);
   });
 
-  final tNews = News(
-    title: "",
-    date: "",
-    description: "",
-    link: ""
-  );
+  final List<News> tNews = [
+    
+  ];
 
   test(
   'should get last news from repository', 
