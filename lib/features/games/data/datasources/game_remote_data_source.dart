@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:csgo_flutter/core/error/exceptions.dart';
-import 'package:csgo_flutter/features/games/data/models/game_model.dart';
-
-import '../../domain/entities/game.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-import 'package:http/http.dart' as http;
+import '../../../../core/consts/api.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../domain/entities/game.dart';
+import '../models/game_model.dart';
 
 abstract class GameRemoteDataSource
 {
@@ -21,7 +21,6 @@ abstract class GameRemoteDataSource
   Future<List<Game>> getLastGames();
 }
 
-const BASE_API = "https://hltv-api.vercel.app/api/";
 
 class GameRemoteDataSourceImpl implements GameRemoteDataSource
 {
