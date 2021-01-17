@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'features/home/pages/home.dart';
+import 'injection_container.dart' as injectionContainer;
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Intl.defaultLocale = "pt_BR";
+  initializeDateFormatting();
+
+  injectionContainer.init();
+  GetIt.I.isReady<SharedPreferences>().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +27,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Container(),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }
