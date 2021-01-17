@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:csgo_flutter/core/consts/api.dart';
 import 'package:csgo_flutter/core/error/exceptions.dart';
-import 'package:csgo_flutter/features/games/data/datasources/game_local_data_source.dart';
 import 'package:csgo_flutter/features/games/data/datasources/game_remote_data_source.dart';
 import 'package:csgo_flutter/features/games/data/models/game_model.dart';
 import 'package:mockito/mockito.dart';
@@ -46,7 +46,7 @@ void main() {
     final tGameModel = GameModel.fromJson(json.decode(fixture('game_cached.json')));
 
     test(
-      'should perform http GET function with matches endpoint and returns the valid json', 
+      'should perform http GET function with matches endpoint', 
       () async {
         setupMockHttpClientSucess200('game_cached.json');
 
