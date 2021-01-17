@@ -1,0 +1,1 @@
+const BASE_API = "https://hltv-api.vercel.app/api/";
