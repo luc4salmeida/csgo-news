@@ -17,7 +17,7 @@ abstract class GameLocalDataSource
   /// the user had internet connection
   ///
   /// Throws a [CacheException] for all error codes
-  Future<GameModel> getGameByMatchId(String id);
+  Future<GameModel> getGameByMatchId(int id);
 
   Future<void> cacheGame(GameModel gameCache);
   Future<void> cacheLastGames(List<GameModel> lastGamesCache);
@@ -35,7 +35,9 @@ class GameLocalDataSourceImpl implements GameLocalDataSource
   @override
   Future<List<GameModel>> getLastGames() {
 
+    sharedPreferences.clear();
     final cachedString = sharedPreferences.getString(LAST_GAMES_CACHED);
+    
 
     if(cachedString == null) {
       throw CacheException();
@@ -50,12 +52,13 @@ class GameLocalDataSourceImpl implements GameLocalDataSource
   }
 
   @override
-  Future<GameModel> getGameByMatchId(String id) {
+  Future<GameModel> getGameByMatchId(int id) {
     final cachedString = sharedPreferences.getString(LAST_GAME_CACHED);
 
     if(cachedString == null) {
       throw CacheException();
     }
+
     final cachedData = json.decode(cachedString);
     return Future.value(GameModel.fromJson(cachedData));
   }

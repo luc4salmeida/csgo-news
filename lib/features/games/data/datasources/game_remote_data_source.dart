@@ -13,7 +13,7 @@ abstract class GameRemoteDataSource
   /// Calls the https://hltv-api.vercel.app/api/{id} endpoint
   /// 
   /// Throws a [ServerException] for all error codes
-  Future<Game> getGameByMatchId(String id);
+  Future<Game> getGameByMatchId(int id);
 
   /// Calls the https://hltv-api.vercel.app/api/matches endpoint
   /// 
@@ -29,8 +29,8 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource
   GameRemoteDataSourceImpl({@required this.httpClient});
 
   @override
-  Future<Game> getGameByMatchId(String id) async {
-    final response = await httpClient.get(BASE_API + id);
+  Future<Game> getGameByMatchId(int id) async {
+    final response = await httpClient.get(BASE_API + id.toString());
 
     if(response.statusCode != 200) {
       throw ServerException();
@@ -42,7 +42,9 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource
   @override
   Future<List<Game>> getLastGames() async {
 
-    final response = await httpClient.get(BASE_API + 'matches');
+    final response = await httpClient.get(
+      BASE_API + 'matches',
+    );
 
     if(response.statusCode != 200) {
       throw ServerException();
