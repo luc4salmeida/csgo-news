@@ -14,16 +14,16 @@ class GetGameByMatchId implements UseCase<Game, Params>
 
   @override
   Future<Either<Failure, Game>> call(Params params) {
-    return repository.getGameByMatchId(params.matchUrl);
+    return repository.getGameByMatchId(params.id);
   }
 }
 
 class Params extends Equatable
 {
-  final String matchUrl;
+  final int id;
 
-  Params({@required this.matchUrl});
+  Params({@required this.id});
 
   @override
-  List<Object> get props => [matchUrl];
+  List<Object> get props => [id];
 }

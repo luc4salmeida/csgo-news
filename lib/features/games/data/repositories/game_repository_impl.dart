@@ -18,7 +18,7 @@ class GameRepositoryImpl implements GameRepository
   GameRepositoryImpl({@required this.remoteDataSource, @required this.localDataSource, @required this.networkInfo});
 
   @override
-  Future<Either<Failure, Game>> getGameByMatchId(String id) async {
+  Future<Either<Failure, Game>> getGameByMatchId(int id) async {
     try {
       if(await networkInfo.isConnected) {
 

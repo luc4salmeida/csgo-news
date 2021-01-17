@@ -4,6 +4,6 @@ import '../../../../core/error/failure.dart';
 import '../entities/game.dart';
 
 abstract class GameRepository {
-  Future<Either<Failure, Game>> getGameByMatchId(String id);
-  Future<Either<Failure, List<Game>>>getLastGames();
+  Future<Either<Failure, Game>> getGameByMatchId(int id);
+  Future<Either<Failure, List<Game>>> getLastGames();
 }
