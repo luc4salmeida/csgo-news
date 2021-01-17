@@ -28,6 +28,12 @@ dependencies:
 
   shared_preferences: ^0.5.12+4
 
+  get_it: ^5.0.4
+
+  flutter_bloc: ^6.1.1
+
+  intl: ^0.16.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
