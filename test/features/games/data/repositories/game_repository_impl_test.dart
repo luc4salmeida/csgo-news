@@ -38,22 +38,23 @@ void main() {
 
   group('getMatchById', () {
 
-
-    final matchId = "matches/2332210/liquid-vs-faze-blast-pro-series-miami-2019";
-
     final tGameModel = GameModel(
       event: "",
-      maps: "",
-      matchId: "",
+      map: "",
+      id: 1,
+      link: "",
       team1: null,
-      team2: null
+      team2: null,
+      eventCrest: "",
+      stars: 1,
+      time: ""
     );
 
     test('should check if the device is connected', () async {
       when(mockNetworkInfo.isConnected)
         .thenAnswer((realInvocation) async => true);
 
-      repository.getGameByMatchId(matchId);
+      repository.getGameByMatchId(tGameModel.id);
 
       verify(mockNetworkInfo.isConnected);
     }); 
@@ -69,10 +70,10 @@ void main() {
         .thenAnswer((realInvocation) async => tGameModel);
 
         //act
-        final result = await repository.getGameByMatchId(matchId);
+        final result = await repository.getGameByMatchId(tGameModel.id);
 
         //verify
-        verify(mockRemoteDataSource.getGameByMatchId(matchId));
+        verify(mockRemoteDataSource.getGameByMatchId(tGameModel.id));
         expect(result, Right(tGameModel));
       });
 
@@ -82,10 +83,10 @@ void main() {
         .thenAnswer((realInvocation) async => tGameModel);
 
         //act
-        await repository.getGameByMatchId(matchId);
+        await repository.getGameByMatchId(tGameModel.id);
 
         //verify
-        verify(mockRemoteDataSource.getGameByMatchId(matchId));
+        verify(mockRemoteDataSource.getGameByMatchId(tGameModel.id));
         verify(mockLocalDataSource.cacheGame(tGameModel));
       });
 
@@ -95,10 +96,10 @@ void main() {
           .thenThrow(ServerException());
 
         //act
-        final result = await repository.getGameByMatchId(matchId);
+        final result = await repository.getGameByMatchId(tGameModel.id);
 
         //verify
-        verify(mockRemoteDataSource.getGameByMatchId(matchId));
+        verify(mockRemoteDataSource.getGameByMatchId(tGameModel.id));
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, Left(ServerFailure()));
       });
@@ -113,25 +114,25 @@ void main() {
 
 
       test('should return last locally cached data when cached data is present', () async {
-        when(mockLocalDataSource.getGameByMatchId(matchId))
+        when(mockLocalDataSource.getGameByMatchId(tGameModel.id))
         .thenAnswer((_) async => tGameModel);
 
-        final result = await repository.getGameByMatchId(matchId);
+        final result = await repository.getGameByMatchId(tGameModel.id);
 
         
         verifyZeroInteractions(mockRemoteDataSource);
-        verify(mockLocalDataSource.getGameByMatchId(matchId));
+        verify(mockLocalDataSource.getGameByMatchId(tGameModel.id));
         expect(result, Right(tGameModel));
       });
       
        test('should return cache failure when cached data is not present', () async {
-        when(mockLocalDataSource.getGameByMatchId(matchId))
+        when(mockLocalDataSource.getGameByMatchId(tGameModel.id))
         .thenThrow(CacheException());
 
-        final result = await repository.getGameByMatchId(matchId);
+        final result = await repository.getGameByMatchId(tGameModel.id);
         
         verifyZeroInteractions(mockRemoteDataSource);
-        verify(mockLocalDataSource.getGameByMatchId(matchId));
+        verify(mockLocalDataSource.getGameByMatchId(tGameModel.id));
         expect(result, Left(CacheFailure()));
       });
     });
@@ -142,10 +143,14 @@ void main() {
     final List<GameModel> tLastGamesModel = [
       GameModel(
         event: "",
-        maps: "",
-        matchId: "",
+        map: "",
+        id: 0,
+        link: "",
         team1: null,
-        team2: null
+        team2: null,
+        eventCrest: "",
+        stars: 1,
+        time: ""
       )
     ];
 

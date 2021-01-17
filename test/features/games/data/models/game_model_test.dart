@@ -9,19 +9,26 @@ import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
   final tGameModel = GameModel(
-    event: "UNITED Pro Series Winter 2020",
-    maps: "bo3",
-    team1: TeamModel(
-      name: "SPARX",
-      crest :"https://img-cdn.hltv.org/teamlogo/zQUPdUEf_wQgLO-QhDxQ64.svg?ixlib=java-2.1.0&s=6385d292e2432df8c82991b1ed3a3fa3",
-      result :0
-    ),
-    team2: TeamModel(
-        name: "ttc",
-        crest: "https://img-cdn.hltv.org/teamlogo/Nsu3Bx5jLmrJzFAYSX7yvS.png?ixlib=java-2.1.0&s=f2fcae9a54190745e217c476fd644eb0",
-        result: 2
-    ),
-    matchId :"/matches/2346069/sparx-vs-ttc-united-pro-series-winter-2020"
+    id: 20789,
+    event: "FALA BRAZIL",
+    eventCrest: "https://img-cdn.hltv.org/teamlogo/zQUPdUEf_wQgLO-QhDxQ64.svg?ixlib=java-2.1.0&s=6385d292e2432df8c82991b1ed3a3fa3",
+
+    map:"mirage",
+    stars: 1,
+    time: "2021-01-17T09:00:00.000Z",
+    link: "http//google.com",
+
+    team1: TeamModel.fromJson({
+      "name":"SPARX",
+      "crest":"https://img-cdn.hltv.org/teamlogo/zQUPdUEf_wQgLO-QhDxQ64.svg?ixlib=java-2.1.0&s=6385d292e2432df8c82991b1ed3a3fa3",
+      "result":0
+    }),
+
+    team2: TeamModel.fromJson({
+      "name":"ttc",
+      "crest":"https://img-cdn.hltv.org/teamlogo/Nsu3Bx5jLmrJzFAYSX7yvS.png?ixlib=java-2.1.0&s=f2fcae9a54190745e217c476fd644eb0",
+      "result":2
+    })
   );
 
   test(
@@ -52,20 +59,28 @@ void main() {
 
       //asset
       final expectedMap = {
-        "event":"UNITED Pro Series Winter 2020",
-        "maps":"bo3",
-        "team1":{
-            "name":"SPARX",
-            "crest":"https://img-cdn.hltv.org/teamlogo/zQUPdUEf_wQgLO-QhDxQ64.svg?ixlib=java-2.1.0&s=6385d292e2432df8c82991b1ed3a3fa3",
-            "result":0
-        },
-        "team2":{
-            "name":"ttc",
-            "crest":"https://img-cdn.hltv.org/teamlogo/Nsu3Bx5jLmrJzFAYSX7yvS.png?ixlib=java-2.1.0&s=f2fcae9a54190745e217c476fd644eb0",
-            "result":2
-        },
-        "matchId":"/matches/2346069/sparx-vs-ttc-united-pro-series-winter-2020"
-      };
+        "id": 20789,
+        "event": "FALA BRAZIL",
+        "eventCrest": "https://img-cdn.hltv.org/teamlogo/zQUPdUEf_wQgLO-QhDxQ64.svg?ixlib=java-2.1.0&s=6385d292e2432df8c82991b1ed3a3fa3",
+
+        "map":"mirage",
+        "stars": 1,
+        "time": "2021-01-17T09:00:00.000Z",
+        "link": "http//google.com",
+
+        "teams": [
+          {
+            "name": "SPARX",
+            "crest": "https://img-cdn.hltv.org/teamlogo/zQUPdUEf_wQgLO-QhDxQ64.svg?ixlib=java-2.1.0&s=6385d292e2432df8c82991b1ed3a3fa3" ,
+            "result": 0
+          },
+          {
+            "name": "ttc",
+            "crest": "https://img-cdn.hltv.org/teamlogo/Nsu3Bx5jLmrJzFAYSX7yvS.png?ixlib=java-2.1.0&s=f2fcae9a54190745e217c476fd644eb0" ,
+            "result": 2
+          }
+        ],
+    };
 
       expect(result, expectedMap);
     });

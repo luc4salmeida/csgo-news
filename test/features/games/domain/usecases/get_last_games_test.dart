@@ -23,10 +23,14 @@ void main() {
   final List<Game> tGames = [
     Game(
       event: "",
-      maps: "",
-      matchId: "",
+      map: "",
+      id: 1,
+      link: "",
       team1: null,
       team2: null,
+      eventCrest: "",
+      stars: 0,
+      time: ""
     )
   ];
 

@@ -28,7 +28,7 @@ void main() {
   void setupMockHttpClientSucess200(String file) {
     when(httpClient.get(any)).thenAnswer((realInvocation) async => http.Response(
       fixture(file),
-      200
+      200,
     ));
   }
 
@@ -41,8 +41,6 @@ void main() {
 
   group('getMatchByID', () {
 
-
-    final tMatchUrl = "matches/2332210/liquid-vs-faze-blast-pro-series-miami-2019";
     final tGameModel = GameModel.fromJson(json.decode(fixture('game_cached.json')));
 
     test(
@@ -50,9 +48,9 @@ void main() {
       () async {
         setupMockHttpClientSucess200('game_cached.json');
 
-        await gameRemoteDataSource.getGameByMatchId(tMatchUrl);
+        await gameRemoteDataSource.getGameByMatchId(tGameModel.id);
 
-        verify(httpClient.get(BASE_API + tMatchUrl));
+        verify(httpClient.get(BASE_API + tGameModel.id.toString()));
       }
     );
 
@@ -61,7 +59,7 @@ void main() {
       () async {
         setupMockHttpClientSucess200('game_cached.json');
 
-        final result = await gameRemoteDataSource.getGameByMatchId(tMatchUrl);
+        final result = await gameRemoteDataSource.getGameByMatchId(tGameModel.id);
 
         expect(result, tGameModel);
       }
@@ -75,12 +73,12 @@ void main() {
 
         final call = gameRemoteDataSource.getGameByMatchId;
 
-        expect(() => call(tMatchUrl), throwsA(TypeMatcher<ServerException>()));
+        expect(() => call(tGameModel.id), throwsA(TypeMatcher<ServerException>()));
       }
     );
   });
 
-    group('getLastGames', () {
+  group('getLastGames', () {
 
     final cachedListGames = json.decode(fixture('last_games_cached.json')) as List;
     final List<GameModel> tListGamesModel = cachedListGames.map(
@@ -121,4 +119,5 @@ void main() {
       }
     );
   });
+
 }

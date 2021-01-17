@@ -22,18 +22,16 @@ void main() {
     mockSharedPreferences = MockSharedPreferences();
     dataSourceImpl = GameLocalDataSourceImpl(sharedPreferences: mockSharedPreferences);
   });
-
-  final cachedListGames = json.decode(fixture('last_games_cached.json')) as List;
-  final List<GameModel> tListGamesModel = cachedListGames.map(
-    (e) => GameModel.fromJson(e)
-  ).toList();
-
-  final matchId = "test";
-  final cachedGame = json.decode(fixture('game_cached.json'));
-  final tGameModel = GameModel.fromJson(cachedGame);
   
 
+  final cachedGameModel = json.decode(fixture('game_cached.json'));
+  final tGameModel = GameModel.fromJson(cachedGameModel);
+
+  final cachedListGames = json.decode(fixture('last_games_cached.json')) as List;
+  final List<GameModel> tListGameModels = cachedListGames.map((e) => GameModel.fromJson(e)).toList();
+
   group('getLastGames', () {
+
     test('should return List<GameModel> from SharedPreferences when there is one in the cache', 
     () async {
       when(mockSharedPreferences.getString(any)).thenAnswer(
@@ -42,7 +40,7 @@ void main() {
       final result = await dataSourceImpl.getLastGames();
 
       verify(mockSharedPreferences.getString(any));
-      expect(result, tListGamesModel);
+      expect(result, tListGameModels);
     });
 
     test('should throw a Exception when there is none in the cache', 
@@ -56,12 +54,13 @@ void main() {
 
     test('should call SharedPreferences to save the data', 
     () async {
-      await dataSourceImpl.cacheLastGames(tListGamesModel);
+      await dataSourceImpl.cacheLastGames(tListGameModels);
       verify(mockSharedPreferences.setString(
         LAST_GAMES_CACHED, 
-        json.encode(tListGamesModel.fold<String>("", (previousValue, element) => previousValue + json.encode(element.toJson())
+        json.encode(tListGameModels.fold<String>("", (previousValue, element) => previousValue + json.encode(element.toJson())
       ))));
-    });  
+    }); 
+
   });
 
   group('getMatchByID', () {
@@ -70,7 +69,7 @@ void main() {
       when(mockSharedPreferences.getString(any)).thenAnswer(
         (realInvocation) => fixture('game_cached.json'));
 
-      final result = await dataSourceImpl.getGameByMatchId(matchId);
+      final result = await dataSourceImpl.getGameByMatchId(tGameModel.id);
 
       verify(mockSharedPreferences.getString(any));
       expect(result, tGameModel);
@@ -82,7 +81,7 @@ void main() {
 
       final call = dataSourceImpl.getGameByMatchId;
 
-      expect(() => call(matchId), throwsA(TypeMatcher<CacheException>()));
+      expect(() => call(tGameModel.id), throwsA(TypeMatcher<CacheException>()));
     });
 
     
@@ -96,3 +95,4 @@ void main() {
     }); 
   });
 }
+

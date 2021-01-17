@@ -20,13 +20,16 @@ void main() {
   });
 
 
-  final matchUrl = "2332210/liquid-vs-faze-blast-pro-series-miami-2019";
   final Game tGame = Game(
-    event: "test",
-    maps: "d2",
-    matchId: "1",
-    team1: null,
-    team2: null
+      event: "",
+      map: "",
+      id: 0,
+      link: "",
+      team1: null,
+      team2: null,
+      eventCrest: "",
+      stars: 1,
+      time: ""
   );
 
   test(
@@ -38,11 +41,11 @@ void main() {
         .thenAnswer((realInvocation) async => Right(tGame));
 
       //act
-      final result = await useCase(Params(matchUrl: matchUrl));
+      final result = await useCase(Params(id: tGame.id));
 
       //asset
       expect(result, Right(tGame));
-      verify(mockGameRepository.getGameByMatchId(matchUrl));
+      verify(mockGameRepository.getGameByMatchId(tGame.id));
       verifyNoMoreInteractions(mockGameRepository);
   });
 }
