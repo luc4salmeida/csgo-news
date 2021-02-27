@@ -1,4 +1,4 @@
-# csgo_flutter
+# csgo-news
 <<<<<<< HEAD
 
 A new Flutter project.
